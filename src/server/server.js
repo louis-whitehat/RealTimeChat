@@ -12,8 +12,7 @@ app.use(cors);
 let http = require('http').Server(app);
 let io = require('socket.io')(http, {
     cors: {
-        origin: "http://localhost:8080",
-        methods: ["GET", "POST"]
+        origin: "*"
     }
 });
 

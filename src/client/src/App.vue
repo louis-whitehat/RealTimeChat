@@ -66,7 +66,7 @@
 <script>
 import io from "socket.io-client";
 
-var socket = io("ws://localhost:3000");
+var socket = io("ws://192.168.0.95:3000");
 
 export default {
   name: "App",
