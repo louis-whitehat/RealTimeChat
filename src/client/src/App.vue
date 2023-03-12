@@ -32,19 +32,19 @@
             <span class="float-right">{{ connections }} connections</span>
           </h4>
         </div>
-        <ul class="list-group list-group-flush text-right">
+        <div class="list-group list-group-flush text-right">
           <small v-if="typing" class="text-white">{{ typing }} is typing</small>
-          <li
+          <div
             class="list-group-item"
             v-for="message in messages"
             :key="message"
           >
             <span :class="{ 'float-left': message.type === 1 }">
+              <small>{{ message.user }}: </small>
               {{ message.message }}
-              <small>:{{ message.user }}</small>
             </span>
-          </li>
-        </ul>
+          </div>
+        </div>
 
         <div class="card-body">
           <form @submit.prevent="send">
@@ -182,5 +182,14 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.list-group-item {
+  background: yellow;
+  border: solid 1px black;
+  padding: 5px;
+  list-style-type: none;
+}
+.card-body {
+  padding: 10px 0px 0px 0px
 }
 </style>
