@@ -7,30 +7,26 @@
         </p>
       </div>
       <div v-if="!ready">
-        <h4>Enter your username</h4>
+        <h1>GIB DEINEN NAMEN EIN</h1>
         <form @submit.prevent="addUser">
           <div class="form-group row">
             <input
               type="text"
               class="form-control col-9"
               v-model="username"
-              placeholder="Enter username here"
+              placeholder="DEIN NAME"
             />
             <input
               type="submit"
-              value="Join"
+              value="BEITRETEN"
               class="btn btn-sm btn-info ml-1"
             />
           </div>
         </form>
       </div>
-      <h2 v-else>{{ username }}</h2>
+      <h1 class="user" v-else>{{ username }}</h1>
       <div class="card bg-info" v-if="ready">
         <div class="card-header text-white">
-          <h4>
-            My Chat App
-            <span class="float-right">{{ connections }} connections</span>
-          </h4>
         </div>
         <div class="list-group list-group-flush text-right">
           <small v-if="typing" class="text-white">{{ typing }} is typing</small>
@@ -53,7 +49,7 @@
                 type="text"
                 class="form-control"
                 v-model="newMessage"
-                placeholder="Enter message here"
+                placeholder="NACHRICHT"
               />
             </div>
           </form>
@@ -66,7 +62,7 @@
 <script>
 import io from "socket.io-client";
 
-var socket = io("ws://192.168.0.95:3000");
+var socket = io("ws://192.168.0.235:3000");
 
 export default {
   name: "App",
@@ -180,16 +176,19 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #ff0000;
   margin-top: 60px;
 }
 .list-group-item {
-  background: yellow;
-  border: solid 1px black;
+  background: rgb(255, 255, 255);
+  border: solid 1px white;
   padding: 5px;
   list-style-type: none;
 }
 .card-body {
-  padding: 10px 0px 0px 0px
+  padding: 100px 0px 0px 0px
+}
+.user {
+  color: black
 }
 </style>
