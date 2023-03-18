@@ -7,24 +7,7 @@
         </p>
       </div>
       <div v-if="!ready">
-        <h2>🔤️ 🔤️</h2>
-        <h1>GIB DEINEN NAMEN EIN</h1>
-        <H2>😎️ 😎️ 😎️ 😎️ 😎️ 😎️</H2>
-        <form @submit.prevent="addUser">
-          <div class="form-group row">
-            <input
-              type="text"
-              class="form-control col-9"
-              v-model="username"
-              placeholder="🗨️ DEIN NAME 💬️"
-            />
-            <input
-              type="submit"
-              value="BEITRETEN"
-              class="btn btn-sm btn-info ml-1"
-            />
-          </div>
-        </form>
+        <LogIn @newUser="addUser($event)"/>
       </div>
       <h1 class="user" v-else>{{ username }}</h1>
       <div class="card bg-info" v-if="ready">
@@ -67,12 +50,15 @@
 
 <script>
 import io from "socket.io-client";
+import LogIn from "./components/LogIn"
 
 var socket = io("ws://192.168.0.235:3000");
 
 export default {
   name: "App",
-
+  components: {
+    LogIn
+  },
   data() {
     return {
       newMessage: null,
@@ -82,7 +68,7 @@ export default {
       ready: false,
       info: [],
       connections: 0,
-    };
+    }
   },
 
   created() {
@@ -150,7 +136,6 @@ export default {
     },
   },
 
-  //Vue Methods hook
   methods: {
     //The send method stores the user message and emit an event to the server.
     send() {
@@ -167,8 +152,8 @@ export default {
       this.newMessage = null;
     },
 
-    // The addUser method emit a 'joined' event with the username and set the 'ready' property to true.
-    addUser() {
+    addUser(value) {
+      this.username = value;
       this.ready = true;
       socket.emit("joined", this.username);
     },
